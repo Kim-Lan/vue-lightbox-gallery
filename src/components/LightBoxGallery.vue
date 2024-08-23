@@ -42,7 +42,7 @@ function closeLightbox() {
     class="lightbox"
     @click.self="closeLightbox"
   >
-    <img :src="currentImage" />
+    <img :src="currentImage" class="lightbox-content" />
   </div>
 </template>
 
@@ -81,5 +81,14 @@ function closeLightbox() {
   bottom: 0;
   background-color: rgba(10, 10, 10, 0.85);
   z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>
