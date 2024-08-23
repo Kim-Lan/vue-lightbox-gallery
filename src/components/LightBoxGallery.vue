@@ -11,7 +11,10 @@ const index = ref(0);
 
 <template>
   <div>
-    <img v-if="visible" :src="props.images[index]" />
+    <img
+      v-for="(image, index) in props.images"
+      :src="image"
+    />
   </div>
 </template>
 
