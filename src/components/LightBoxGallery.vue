@@ -13,16 +13,28 @@ const props = withDefaults(defineProps<Props>(), {
 const maxSizeString = computed(() => props.maxSize + 'px');
 
 const isLightboxVisible = ref(false);
-const currentImage = ref('');
+const currentIndex = ref(0);
 
 function showLightbox(index: number) {
   isLightboxVisible.value = true;
-  currentImage.value = props.images[index];
+  currentIndex.value = index;
 }
 
 function closeLightbox() {
   isLightboxVisible.value = false;
-  currentImage.value = '';
+  currentIndex.value = 0;
+}
+
+function getPreviousImage() {
+  if (currentIndex.value > 0) {
+    currentIndex.value -= 1;
+  }
+}
+
+function getNextImage() {
+  if (currentIndex.value < props.images.length - 1) {
+    currentIndex.value += 1;
+  }
 }
 </script>
 
@@ -43,7 +55,60 @@ function closeLightbox() {
       class="lightbox"
       @click.self="closeLightbox"
     >
-      <img :src="currentImage" class="lightbox-content" />
+      <!-- Previous Button -->
+      <button class="lightbox-button" @click="getPreviousImage">
+        <svg
+          width="25"
+          height="40"
+          viewBox="0 0 25 40"
+        >
+          <polyline
+            points="19 5 5 20 19 35"
+            stroke-width="3"
+            stroke-linecap="butt"
+            fill="none"
+            stroke-linejoin="round"
+            stroke="rgba(255, 255, 255, 0.85)"
+          />
+        </svg>
+      </button>
+
+      <!-- Current Image -->
+      <img :src="images[currentIndex]" class="lightbox-content" />
+
+      <!-- Next Button -->
+      <button class="lightbox-button" @click="getNextImage">
+        <svg
+          width="25"
+          height="40"
+          viewBox="0 0 25 40"
+        >
+          <polyline
+            points="6 5 20 20 6 35"
+            stroke-width="3"
+            stroke-linecap="butt"
+            fill="none"
+            stroke-linejoin="round"
+            stroke="rgba(255, 255, 255, 0.85)"
+          />
+        </svg>
+      </button>
+
+      <!-- Close Button -->
+      <button class="lightbox-button lightbox-close" @click="closeLightbox">
+        <svg
+          width="30"
+          height="30"
+        >
+          <g
+            stroke-width="3"
+            stroke="rgba(255, 255, 255, 0.85)"
+          >
+            <line x1="5" y1="5" x2="25" y2="25" />
+            <line x1="5" y1="25" x2="25" y2="5" />
+          </g>
+        </svg>
+      </button>
     </div>
   </Transition>
 </template>
@@ -83,15 +148,38 @@ function closeLightbox() {
   bottom: 0;
   background-color: rgba(10, 10, 10, 0.85);
   z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.lightbox-button {
+  background: none;
+  border: none;
+  padding: 4px;
   
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
 }
 
-.lightbox-content {
-  max-width: 100%;
-  max-height: 100%;
+.lightbox-button:hover {
+  background: rgb(10, 10, 10, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .v-enter-active,
