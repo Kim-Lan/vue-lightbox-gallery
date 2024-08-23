@@ -37,13 +37,15 @@ function closeLightbox() {
     </div>
   </div>
 
-  <div
-    v-if="isLightboxVisible"
-    class="lightbox"
-    @click.self="closeLightbox"
-  >
-    <img :src="currentImage" class="lightbox-content" />
-  </div>
+  <Transition>
+    <div
+      v-if="isLightboxVisible"
+      class="lightbox"
+      @click.self="closeLightbox"
+    >
+      <img :src="currentImage" class="lightbox-content" />
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
@@ -81,7 +83,7 @@ function closeLightbox() {
   bottom: 0;
   background-color: rgba(10, 10, 10, 0.85);
   z-index: 1000;
-
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,5 +92,15 @@ function closeLightbox() {
 .lightbox-content {
   max-width: 100%;
   max-height: 100%;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
