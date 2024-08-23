@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  
+  thumbnail: string,
+  images: string[]
 }>();
 </script>
 
