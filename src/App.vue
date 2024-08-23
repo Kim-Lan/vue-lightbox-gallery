@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LightBox from './components/LightBox.vue'
+import LightBoxGallery from './components/LightBoxGallery.vue'
 
 const images = [
   'https://picsum.photos/200/300',
@@ -15,7 +15,7 @@ const images = [
   </header>
 
   <main>
-    <LightBox :thumbnail="images[0]" :images />
+    <LightBoxGallery :images />
   </main>
 </template>
 

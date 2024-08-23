@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const props = defineProps<{
-  thumbnail: string,
   images: string[]
 }>();
+
+const visible = ref(false);
+const index = ref(0);
 </script>
 
 <template>
   <div>
-    <h1></h1>
+    <img v-if="visible" :src="props.images[index]" />
   </div>
 </template>
 
