@@ -118,6 +118,7 @@ function getNextImage() {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
   margin: 5px;
 }

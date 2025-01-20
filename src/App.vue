@@ -9,13 +9,14 @@ const images = [
   'https://picsum.photos/1000',
   'https://picsum.photos/1920/1080',
   'https://picsum.photos/1280/720',
-  'https://picsum.photos/2000/1200'
+  'https://picsum.photos/2000/1200',
+  'https://picsum.photos/1800/1200'
 ];
 </script>
 
 <template>
   <header>
-
+    <h1>Vue Lightbox Gallery</h1>
   </header>
 
   <main>
@@ -24,5 +25,12 @@ const images = [
 </template>
 
 <style scoped>
+header {
+  padding: 15px 30px;
+  border-bottom: 4px solid black;
+}
 
+main {
+  padding-top: 15px;
+}
 </style>
